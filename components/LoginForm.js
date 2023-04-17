@@ -1,28 +1,29 @@
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
 import { Form, Input, Button } from "antd";
 import Link from "next/link";
 import styled from "styled-components";
+import useInput from "../hooks/useInput";
+import { useDispatch } from "react-redux";
+import { loginAction } from "../reducers/user";
 
-const LoginForm = ({ setIsLoggedIn }) => {
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordCheck, setPasswordCheck] = useState("");
-
-  const onChangeId = useCallback((e) => {
-    setId(e.target.value);
-  }, []);
-  const onChangePassword = useCallback((e) => {
-    setPassword(e.target.value);
-  }, []);
+const LoginForm = () => {
+  const dispatch = useDispatch();
+  // const [id, setId] = useState("");
+  // const onChangeId = useCallback((e) => {
+  //   setId(e.target.value);
+  // }, []);
+  // -> 커스텀 훅으로 변환
+  const [id, onChangeId] = useInput("");
+  const [password, onChangePassword] = useInput("");
+  // const [passwordCheck, setPasswordCheck] = useState("");
 
   const onSubmitForm = useCallback(() => {
-    console.log({ id, password });
-    console.log(setIsLoggedIn);
-    setIsLoggedIn(true);
+    console.log(id, password);
+    dispatch(loginAction({ id, password }));
   }, [id, password]);
 
   return (
-    <Form onFinish={onSubmitForm}>
+    <FormWrapper onFinish={onSubmitForm}>
       <div>
         <label htmlFor="user-id">아이디</label>
         <br />
@@ -50,12 +51,16 @@ const LoginForm = ({ setIsLoggedIn }) => {
           </a>
         </Link>
       </ButtonWrapper>
-    </Form>
+    </FormWrapper>
   );
 };
 
 export default LoginForm;
 
 const ButtonWrapper = styled.div`
-  margin-top: 10px;
+  margin: 10px;
+`;
+
+const FormWrapper = styled(Form)`
+  padding: 10px;
 `;
