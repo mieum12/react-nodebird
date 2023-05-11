@@ -1,16 +1,20 @@
-import { useCallback, useState, useRef } from "react";
+import { useCallback, useRef, useEffect, useState } from "react";
 import { Button, Form, Input } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
 import { addPost } from "../reducers/post";
 
 const PostForm = () => {
-  const { imagePaths } = useSelector((state) => state.post);
+  const { imagePaths, addPostDone } = useSelector((state) => state.post);
   const dispatch = useDispatch();
   const [text, setText] = useState("");
-  const onChangeText = useCallback((e) => {
-    setText(e.target.value);
-  }, []);
+
+  useEffect(() => {
+    if (addPostDone) {
+      setText(""); //포스팅이 완료되면 비워주기
+    }
+  }, [addPostDone]);
+
+  const onChangeText = useCallback((e) => setText(e.target.value), []);
 
   //이미지업로드창 띄우기
   const imageInput = useRef();
@@ -19,9 +23,8 @@ const PostForm = () => {
   }, [imageInput.current]);
 
   const onsubmit = useCallback(() => {
-    dispatch(addPost);
-    setText("");
-  }, []);
+    dispatch(addPost(text));
+  }, [text]);
 
   return (
     <Form

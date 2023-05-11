@@ -9,15 +9,15 @@ import LoginForm from "./LoginForm";
 
 const AppLayout = ({ children }) => {
   //리덕스 사용
-  //isLoggedIn이 바뀌면 컴포넌트 알아서 리랜더링
-  const { isLoggedIn } = useSelector((state) => state.user);
+  //me이 바뀌면 컴포넌트 알아서 리랜더링
+  const { me } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   // const dummy = {
   //   nickname: "지워닝",
   //   Post: [],
   //   Followings: [],
   //   Followers: [],
-  //   isLoggedIn: false,
+  //   logInDone: false,
   // };
 
   const menuItems = [
@@ -57,8 +57,8 @@ const AppLayout = ({ children }) => {
       <Menu mode="horizontal" items={menuItems} />
       <Row gutter={8}>
         <Col xs={24} md={6}>
-          {isLoggedIn ? <UserProfile /> : <LoginForm />}
-          {/* {dummy.isLoggedIn ? <UserProfile /> : <LoginForm />} */}
+          {me ? <UserProfile /> : <LoginForm />}
+          {/* {dummy.logInDone ? <UserProfile /> : <LoginForm />} */}
         </Col>
         <Col xs={24} md={12}>
           {children}
