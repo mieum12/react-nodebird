@@ -6,4 +6,5 @@ import userSaga from "./user";
 
 export default function* rootSaga() {
   yield all([fork(postSaga), fork(userSaga)]);
+  console.log("root saga연결");
 }

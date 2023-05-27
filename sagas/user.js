@@ -25,6 +25,7 @@ function* logIn(action) {
       type: LOG_IN_SUCCESS,
       data: action.data, //성공 결과가 담김
     });
+    console.log("로그인 saga연결");
   } catch (err) {
     yield put({
       type: LOG_IN_FAILURE,
@@ -44,6 +45,7 @@ function* logOut() {
     yield put({
       type: LOG_OUT_SUCCESS,
     });
+    console.log("로그아웃 saga연결");
   } catch (err) {
     yield put({
       type: LOG_OUT_FAILURE,
@@ -63,6 +65,7 @@ function* signUp() {
     yield put({
       type: SIGN_UP_SUCCESS,
     });
+    console.log("회원가입 saga연결");
   } catch (err) {
     yield put({
       type: SIGN_UP_FAILURE,

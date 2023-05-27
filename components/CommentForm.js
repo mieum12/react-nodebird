@@ -7,8 +7,9 @@ import useInput from "../hooks/useInput";
 import { ADD_COMMENT_REQUEST } from "../reducers/post";
 
 const CommentForm = ({ post }) => {
+  //게시글은 props로 받고
   const dispatch = useDispatch();
-  const id = useSelector((state) => state.user.me?.id);
+  const id = useSelector((state) => state.user.me?.id); //내 아이디는 reducer에서 가져오고
   const { addCommentDone, addCommentLoading } = useSelector(
     (state) => state.post
   );
@@ -24,6 +25,7 @@ const CommentForm = ({ post }) => {
     dispatch({
       type: ADD_COMMENT_REQUEST,
       data: { content: commentText, postId: post.id, userId: id },
+      //얘네들은 dispatch해서 ADD_COMMENT_REQUEST에 올려준다 -> saga가 받음
     });
   }, [commentText, id]);
 

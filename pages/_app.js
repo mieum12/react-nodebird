@@ -8,6 +8,7 @@ const NodeBird = ({ Component }) => {
     <div>
       <Head>
         <meta charSet="utf-8" />
+        <link rel="shortcut icon" href="/favicon.ico" />
         <title>NodeBird</title>
       </Head>
       {/* <div>전체의 공통메뉴</div> */}
