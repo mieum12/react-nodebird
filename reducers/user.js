@@ -94,7 +94,7 @@ const reducer = (state = initialState, action) =>
         break;
       case FOLLOW_SUCCESS:
         draft.followLoading = false;
-        draft.me.Followings.push({ id: action.data });
+        draft.me.Followings.push({ id: action.data }); //팔로잉 목록에 id를 넣어준다
         draft.followDone = true;
         break;
       case FOLLOW_FAILURE:
@@ -109,6 +109,7 @@ const reducer = (state = initialState, action) =>
       case UNFOLLOW_SUCCESS:
         draft.unfollowLoading = false;
         draft.me.Followings = draft.me.Followings.filter(
+          //삭제할땐 걸러주기
           (v) => v.id !== action.data
         );
         draft.unfollowDone = true;

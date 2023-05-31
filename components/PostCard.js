@@ -16,6 +16,7 @@ import Link from "next/link";
 import PostImages from "./PostImages";
 import CommentForm from "./CommentForm";
 import PostCardContent from "./PostCardContent";
+import FollowButton from "./FollowButton";
 
 const PostCard = ({ post }) => {
   const dispatch = useDispatch();
@@ -48,72 +49,6 @@ const PostCard = ({ post }) => {
   }, []);
 
   return (
-    // <CardWrapper key={post.id}>
-    //   <Card
-    //     cover={post.Images[0] && <PostImages images={post.Images} />}
-    //     actions={[
-    //       <RetweetOutlined key="retweet" />,
-    //       liked ? (
-    //         <HeartTwoTone
-    //           twoToneColor="red"
-    //           key="heart"
-    //           onClick={onToggleLike}
-    //         />
-    //       ) : (
-    //         <HeartOutlined key="heart" onClick={onToggleLike} />
-    //       ),
-    //       <MessageOutlined key="comment" onClick={onToggleComment} />,
-    //       <Popover
-    //         key="more"
-    //         content={
-    //           <Button.Group>
-    //             {id && post.User.id === id ? (
-    //               <>
-    //                 <Button>수정</Button>
-    //                 <Button
-    //                   type="danger"
-    //                   loading={removePostLoading}
-    //                   onClick={onRemovePost}
-    //                 >
-    //                   삭제
-    //                 </Button>
-    //               </>
-    //             ) : (
-    //               <Button>신고</Button>
-    //             )}
-    //           </Button.Group>
-    //         }
-    //       >
-    //         <EllipsisOutlined />
-    //       </Popover>,
-    //     ]}
-    //   >
-    //     <Card.Meta
-    //       avatar={<Avatar>{post.User.nickname[0]}</Avatar>}
-    //       title={post.User.nickname}
-    //       description={<PostCardContent postData={post.content} />}
-    //     />
-    //   </Card>
-    //   {commentFormOpened && (
-    //     <div>
-    //       <CommentForm post={post} />
-    //       <List
-    //         header={`${post.Comments.length}개의 댓글`}
-    //         itemLayout="horizontal"
-    //         dataSource={post.Comments}
-    //         renderItem={(item) => (
-    //           <li>
-    //             <Comment
-    //               author={item.User.nickname}
-    //               avatar={<Avatar>{item.User.nickname[0]}</Avatar>}
-    //               content={item.content}
-    //             />
-    //           </li>
-    //         )}
-    //       />
-    //     </div>
-    //   )}
-    // </CardWrapper>
     <CardWrapper key={post.id}>
       <Card
         cover={post.Images[0] && <PostImages images={post.Images} />}
@@ -153,7 +88,8 @@ const PostCard = ({ post }) => {
             <EllipsisOutlined />
           </Popover>,
         ]}
-        // extra={<FollowButton post={post} />}
+        //우측 상단에 엑스트라 공간을 주고 팔로우버튼(로그인 시 보이게)
+        extra={id && <FollowButton post={post} />}
       >
         <Card.Meta
           avatar={<Avatar>{post.User.nickname[0]}</Avatar>}
