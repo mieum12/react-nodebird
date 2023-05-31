@@ -7,7 +7,8 @@ import { produce } from "immer";
 export const initialState = {
   mainPosts: [],
   imagePaths: [],
-  hasMorePosts: true,
+
+  hasMorePosts: true, //처음에는 데이터를 가져오려는 시도를 해야한다
   loadPostsLoading: false,
   loadPostsDone: false,
   loadPostsError: null,
@@ -22,8 +23,9 @@ export const initialState = {
   addCommentError: null,
 };
 
-initialState.mainPosts = initialState.mainPosts.concat(
-  Array(10)
+//더미데이터 부분을 함수로 빼주기 -> 무한스트롤 시 10개씩 불러오기 구현
+export const generateDummyPost = (number) =>
+  Array(number)
     .fill()
     .map(() => ({
       id: shortId.generate(),
@@ -46,8 +48,10 @@ initialState.mainPosts = initialState.mainPosts.concat(
           content: faker.lorem.sentence(),
         },
       ],
-    }))
-);
+    }));
+
+//안해도 처음에 10개 불러옴
+// initialState.mainPosts = initialState.mainPosts.concat(generateDummyPost(10));
 
 //액션 이름을 상수로 빼줌
 export const LOAD_POSTS_REQUEST = "LOAD_POSTS_REQUEST";
@@ -107,8 +111,10 @@ const reducer = (state = initialState, action) =>
       case LOAD_POSTS_SUCCESS:
         draft.loadPostsLoading = false;
         draft.loadPostsDone = true;
-        draft.mainPosts = action.data.concat(draft.mainPosts);
-        draft.hasMorePosts = draft.mainPosts.length < 50;
+        //action.data에 더미데이터 10개가 들어있고 그걸 기존의 것과 합쳐줘서 그게 또 mainPosts가 됨
+        //스크롤 시 새로운 포스트는 아래쪽에 생기도록 수정!!
+        draft.mainPosts = draft.mainPosts.concat(action.data);
+        draft.hasMorePosts = draft.mainPosts.length < 50; //50개보다 많으면 false가 되어서 더이상 포스트를 안가져오겠다
         break;
       case LOAD_POSTS_FAILURE:
         draft.loadPostsLoading = false;
