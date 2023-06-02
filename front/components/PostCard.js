@@ -143,5 +143,7 @@ const PostCard = ({ post }) => {
 export default PostCard;
 
 const CardWrapper = styled.div`
-  margin-bottom: 20px;
+  margin: 10px;
+  // padding: 30px;
+  width: 900px;
 `;

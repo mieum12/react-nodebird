@@ -1,6 +1,6 @@
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import Head from "next/head";
-import "antd/dist/antd.css";
+// import "antd/dist/antd.css";
 import wrapper from "../store/configureStore";
 
 const NodeBird = ({ Component }) => {
@@ -9,7 +9,11 @@ const NodeBird = ({ Component }) => {
       <Head>
         <meta charSet="utf-8" />
         <link rel="shortcut icon" href="/favicon.ico" />
-        <title>NodeBird</title>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Trirong"
+        ></link>
+        <title>LIFE RECAP</title>
       </Head>
       {/* <div>전체의 공통메뉴</div> */}
       <Component />
@@ -17,8 +21,8 @@ const NodeBird = ({ Component }) => {
   );
 };
 
-NodeBird.propTypes = {
-  Component: PropTypes.elementType.isRequired,
-};
+// NodeBird.propTypes = {
+//   Component: PropTypes.elementType.isRequired,
+// };
 
 export default wrapper.withRedux(NodeBird);

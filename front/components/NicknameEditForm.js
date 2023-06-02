@@ -10,7 +10,7 @@ const NicknameEditForm = () => {
         padding: "20px",
       }}
     >
-      <Input.Search addonBefore="닉네임" enterButton="수정" />
+      <Input.Search addonBefore="NICKNAME" enterButton="SAVE" />
     </Form>
   );
 };
