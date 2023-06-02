@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import Marquee from "react-fast-marquee";
 import PropTypes from "prop-types";
 import Link from "next/link";
 // import { Menu, Input, Row, Col } from "antd";
@@ -47,6 +48,23 @@ const AppLayout = ({ children }) => {
   return (
     <>
       {/* <Global /> */}
+      <Marquee
+        style={{
+          paddingTop: "20px",
+          background: "#ff4512",
+          color: "#f7f2ef",
+          fontFamily: "Trirong",
+          fontSize: "20px",
+        }}
+      >
+        <p style={{ paddingRight: "50px" }}>TELL ME ABOUT YOURSELFE !</p>
+        <p style={{ paddingRight: "50px" }}>TELL ME ABOUT YOURSELFE !</p>
+        <p style={{ paddingRight: "50px" }}>TELL ME ABOUT YOURSELFE !</p>
+        <p style={{ paddingRight: "50px" }}>TELL ME ABOUT YOURSELFE !</p>
+        <p style={{ paddingRight: "50px" }}>TELL ME ABOUT YOURSELFE !</p>
+        <p style={{ paddingRight: "50px" }}>TELL ME ABOUT YOURSELFE !</p>
+        <p style={{ paddingRight: "50px" }}>TELL ME ABOUT YOURSELFE !</p>
+      </Marquee>
       <Header
         style={{
           textAlign: "center",
